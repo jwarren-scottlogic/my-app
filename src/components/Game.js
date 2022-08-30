@@ -6,22 +6,19 @@ import calculateWinner from "./CalculateWinner"
 function Game() {
 
 
-    // const [state, setState] = useState({
-    //     history: [{ squares: Array(9).fill(null) }],
-    //     stepNumber: 0,
-    //     xIsNext: true,
-    //     draw: false
-    //     //winLine: []
-    // });
-
     const [History, setHistory] = useState([{ squares: Array(9).fill(null) }])
     const [draw, setDraw] = useState(false)
+    // eslint-disable-next-line no-use-before-define
     
     let stepNumber = History.length
     let xIsNext = (stepNumber % 2) === 0
+    let current = History[stepNumber-1];
+
+    const winner = calculateWinner(current.squares);
     //console.log(xIsNext)
 
     const handleClick = (i) => {
+        console.log("test");
         const history = History.slice(0, stepNumber + 1);
         let current = history[history.length - 1];
         const squares = current.squares.slice();
@@ -30,40 +27,24 @@ function Game() {
             return;
         }
     
-        squares[i] = xIsNext ? "X" : "O";
-        //   setState ({
-            //     history: history.concat([{squares: squares}]),
-            //     stepNumber: history.length,
-            //     xIsNext: !state.xIsNext
-            //   });
-            
-
-            ////////////////////////////////////////////////////////////below is not working, the history is not changing
-            
-            
+        squares[i] = xIsNext ? "X" : "O"; 
         setHistory(History.concat([{ squares: squares }])
         )
-
-
-        //setState({...state, stepNumber :history.length})
-        //setState({...state, xIsNext: !state.xIsNext})
         if (!squares.includes(null)) {
             setDraw(true)
         };
     
         }
+
         const jumpTo = (step) => {
-            // setState({
             stepNumber = step
-            xIsNext = (step % 2) === 0
-                // });
+            xIsNext = (step % 2) === 0;
+            setHistory(History.slice(0,step+1));
+           // current=History[stepNumber];
             }
         
-            // render() {  
-        const current = History[stepNumber-1];
-        console.log(current)
-        const winner = calculateWinner(current.squares);
-        
+       
+       
         
         const moves = History.map((step, move) => {
             const desc = move ?

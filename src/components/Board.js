@@ -6,7 +6,6 @@ function Board(props) {
     const [squares, setSquares] = useState([]);
     useEffect(() => {
         setSquares(props.squares)
-        //console.log(squares)
     }, [props])
 
     const renderSquare = (i) => {
