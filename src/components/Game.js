@@ -41,6 +41,7 @@ function Game() {
             xIsNext = (step % 2) === 0;
             setHistory(History.slice(0,step+1));
            // current=History[stepNumber];
+           console.log('hello')
             }
         
        
