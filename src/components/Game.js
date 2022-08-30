@@ -32,7 +32,9 @@ function Game() {
         )
         if (!squares.includes(null)) {
             setDraw(true)
-        };
+        }else {
+            setDraw(false)
+        }
     
         }
 
