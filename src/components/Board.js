@@ -1,42 +1,51 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import Square from "./Square"
 
-function Board (props){
+function Board(props) {
+    //console.log({props})
+    const [squares, setSquares] = useState([]);
+    useEffect(() => {
+        setSquares(props.squares)
+        //console.log(squares)
+    }, [props])
 
-
-    function renderSquare(i) {
-      return (
-        <Square
-          value={props.squares[i]}
-          onClick={() => props.onClick(i)}
-          classNameProp={props.winline && props.winline.includes(i)?"squares-won":"square"}
-        />
-      );
-    } 
-  
-
-    function squareRows(i){
-        const ar = [0+i,1+i,2+i]
-        return(
-        <div className="board-row">
-        {ar.map(x => renderSquare(x))}
-        </div>
+    const renderSquare = (i) => {
+        return (
+            <Square
+                value={squares[i]}
+                onClick={() => props.onClick(i)}
+                classNameProp={props.winline && props.winline.includes(i) ? "squares-won" : "square"}
+                key={i}
+            />
         );
     }
 
-    function squareColumns(){
-        const ar = 3*[0,1,2]
-        for (let a in ar){
-            {squareRows(a)}
-        }
+    const squareRows = (i) => {
+        const ar = [0 + i, 1 + i, 2 + i]
+        return (
+            <div className="board-row">
+                {ar.map(x => renderSquare(x))}
+            </div>
+        );
     }
 
-        return (
-            <div>
-                {squareColumns()}
-            </div>
-        )
-    
+    // const squareColumns = () => {
+    //     const arS = [0, 1, 2]
+    //     console.log(arS)
+    //     for (let a in arS) {
+    //         squareRows(a)
+    //     }
+    // }
+
+    return (
+        <div>
+            {/* { renderSquare(0)} */}
+            {squareRows(0)}
+            {squareRows(3)}
+            {squareRows(6)}
+        </div>
+    )
+
 }
 
 export default Board;
