@@ -41,17 +41,17 @@ function Game() {
             ////////////////////////////////////////////////////////////below is not working, the history is not changing
             
             
-            setHistory(History.concat([{ squares: squares }])
-            )
+        setHistory(History.concat([{ squares: squares }])
+        )
 
 
-            //setState({...state, stepNumber :history.length})
-            //setState({...state, xIsNext: !state.xIsNext})
-            if (!squares.includes(null)) {
-                setDraw(true)
-            };
-        
-    }
+        //setState({...state, stepNumber :history.length})
+        //setState({...state, xIsNext: !state.xIsNext})
+        if (!squares.includes(null)) {
+            setDraw(true)
+        };
+    
+        }
         const jumpTo = (step) => {
             // setState({
             stepNumber = step
@@ -59,23 +59,20 @@ function Game() {
                 // });
             }
         
-            // render() {
-                //const history = History;
-                if (History){    
-                const current = History[stepNumber];
-                console.log(History)
-                const winner = calculateWinner(current.squares);
-                }
-                //console.log(current.squares)
-                
-                const moves = History.map((step, move) => {
-                    const desc = move ?
-                    'Go to move # ' + move :
-                    'Go to game start';
-                    return (
-                        <li key={move}>
+            // render() {  
+        const current = History[stepNumber-1];
+        console.log(current)
+        const winner = calculateWinner(current.squares);
+        
+        
+        const moves = History.map((step, move) => {
+            const desc = move ?
+            'Go to move # ' + move :
+            'Go to game start';
+            return (
+                <li key={move}>
                 <button className="btn" onClick={() => jumpTo(move)}>{desc}</button>
-            </li>
+                </li>
         );
     });
     
